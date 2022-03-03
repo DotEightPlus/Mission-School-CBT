@@ -401,27 +401,27 @@ if(isset($_POST['seniorclass']) && isset($_POST['seniorsubject']) && isset($_POS
 
 function create_tablesss($class, $subject, $conc, $sshour, $ssminutes, $ssquess, $ssedit) {
 
-// sql to create table
-$sql = "CREATE TABLE `".$conc."`
-(
-id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-sn text(255),
-question text(255),
-oa text(255),
-ob text(255),
-oc text(255),
-od text(255),
-correct text(255)
-)";
-$result = query($sql);
-confirm($result);
+	// sql to create table
+	$sql = "CREATE TABLE `".$conc."`
+	(
+	id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	sn text(255),
+	question text(255),
+	oa text(255),
+	ob text(255),
+	oc text(255),
+	od text(255),
+	correct text(255)
+	)";
+	$result = query($sql);
+	confirm($result);
 
-//time allowed
+	//time allowed
 
-$sqll = "INSERT INTO timer(`subject`, `hour` , `min`, `attempt`, `instruct`)";
-$sqll.= " VALUES('$conc', '$sshour' , '$ssminutes', '$ssquess', '$ssedit')";
-$resullt = query($sqll);
-confirm($resullt);
+	$sqll = "INSERT INTO timer(`subject`, `hour` , `min`, `attempt`, `instruct`)";
+	$sqll.= " VALUES('$conc', '$sshour' , '$ssminutes', '$ssquess', '$ssedit')";
+	$resullt = query($sqll);
+	confirm($resullt);
 
 }
  //end of function 

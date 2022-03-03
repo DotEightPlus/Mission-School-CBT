@@ -369,6 +369,8 @@ $(document).ready(function () {
 
 //Update time and questions to be answered
 $("#timereseted").click(function () {
+  var eddsbj = $("#eddsbj").val();
+  var eddtms = $("#eddtms").val();
   var idc = $("#idc").val();
   var hourc = $("#hourc").val();
   var minutesc = $("#minutesc").val();
@@ -386,6 +388,8 @@ $("#timereseted").click(function () {
       minutesc: minutesc,
       quessc: quessc,
       editc: editc,
+      eddtms: eddtms,
+      eddsbj: eddsbj,
     },
     success: function (data) {
       $(toastr.error(data)).html(data);
