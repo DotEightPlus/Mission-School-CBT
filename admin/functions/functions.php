@@ -830,7 +830,10 @@ echo '<script>window.location.href ="./access?id='.$nww.'"</script>';
 }
 
 
-if(isset($_POST['idc']) && isset($_POST['hourc']) && isset($_POST['minutesc']) && isset($_POST['quessc']) && isset($_POST['editc'])) {
+
+//update time record and subject termly record
+
+if(isset($_POST['idc']) && isset($_POST['hourc']) && isset($_POST['minutesc']) && isset($_POST['quessc']) && isset($_POST['editc']) && isset($_POST['eddsbj']) && isset($_POST['eddtms'])) {
 
 	//set and clean variables
 	$id			=	$_POST['idc'];
@@ -838,10 +841,13 @@ if(isset($_POST['idc']) && isset($_POST['hourc']) && isset($_POST['minutesc']) &
 	$minutes	=   $_POST['minutesc'];
 	$quessc     =   $_POST['quessc'];
 	$editc 		=	$_POST['editc'];
+	$eddtms		= 	$_POST['eddtms'];
+	$eddsbj		= 	$_POST['eddsbj'];
 
+	$conc 		= strtolower($eddsbj."_".$eddtms);
 
 	
-	$sql = "UPDATE `timer` SET `hour` = '$hour', `min` = '$minutes', `attempt` = '$quessc', `instruct` = '$editc' WHERE `subject` = '$id'";
+	$sql = "UPDATE `timer` SET `subject` = '$conc', `hour` = '$hour', `min` = '$minutes', `attempt` = '$quessc', `instruct` = '$editc' WHERE `subject` = '$id'";
 	$result = query($sql);
 	echo "Loading... Please wait";
 	echo '<script>window.location.href ="./questions?id='.$id.'"</script>';
