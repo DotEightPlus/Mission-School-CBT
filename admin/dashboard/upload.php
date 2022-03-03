@@ -113,6 +113,15 @@ include("includes/top.php");
                                 name="subject" class="form-control" required>
                         </div>
 
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Select a Term .:</label>
+                            <select id="sbstrmms" class="form-control">
+                                <option id="sbstrmms">1st Term</option>
+                                <option id="sbstrmms">2nd Term</option>
+                                <option id="sbstrmms">3rd Term</option>
+                            </select>
+                        </div>
+
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="exampleInputPassword1">Time Allowed - Hours .:</label>
@@ -219,6 +228,16 @@ include("includes/top.php");
                                 id="jsssubject" name="jsssubject" class="form-control" required>
                         </div>
 
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Select a Term .:</label>
+                            <select id="juniortrmms" class="form-control">
+                                <option id="juniortrmms">1st Term</option>
+                                <option id="juniortrmms">2nd Term</option>
+                                <option id="juniortrmms">3rd Term</option>
+                            </select>
+                        </div>
+
+
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="exampleInputPassword1">Time Allowed - Hours .:</label>
@@ -291,11 +310,6 @@ include("includes/top.php");
 
 
 
-
-
-
-
-
 <!---modal senior school--->
 <div class="modal fade" id="modal-senior">
     <div class="modal-dialog modal-lg">
@@ -324,6 +338,17 @@ include("includes/top.php");
                             <input type="text" placeholder="e.g Mathematics, English, Chemistry e.t.c"
                                 id="seniorsubject" name="seniorsubject" class="form-control" required>
                         </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Select a Term .:</label>
+                            <select id="seniortrmms" class="form-control">
+                                <option id="seniortrmms">1st Term</option>
+                                <option id="seniortrmms">2nd Term</option>
+                                <option id="seniortrmms">3rd Term</option>
+                            </select>
+                        </div>
+
+
 
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -394,9 +419,6 @@ include("includes/top.php");
 </div>
 <!-- /.modal -->
 <!--- end of code for senior modal -->
-
-
-
 
 
 

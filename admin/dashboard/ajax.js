@@ -27,6 +27,7 @@ $(document).ready(function () {
     var hour = $("#hour").val();
     var minutes = $("#minutes").val();
     var quess = $("#quess").val();
+    var sbstrmms = $("#sbstrmms").val();
     var instruct = $("#edit").val();
     //validate form
     var a = document.forms["uploadquestion"]["subject"].value;
@@ -35,19 +36,16 @@ $(document).ready(function () {
       $(toastr.error("Please create a subject"));
       return false;
     } else {
-
-		if(hour == 0 && minutes == 0) {
-
-			$(toastr.error("Please specify a valid test time"));
-			return false;
-		} else {
-
-		if(instruct == "") {
-			$(toastr.error("Instruction field cannot be empty"));
-			return false;
-		}
-		}
-	}
+      if (hour == 0 && minutes == 0) {
+        $(toastr.error("Please specify a valid test time"));
+        return false;
+      } else {
+        if (instruct == "") {
+          $(toastr.error("Instruction field cannot be empty"));
+          return false;
+        }
+      }
+    }
     //end of form validation
 
     $.ajax({
@@ -60,6 +58,7 @@ $(document).ready(function () {
         minutes: minutes,
         quess: quess,
         instruct: instruct,
+        sbstrmms: sbstrmms,
       },
       success: function (data) {
         $(toastr.error(data)).html(data);
@@ -74,28 +73,26 @@ $(document).ready(function () {
     var jsshour = $("#jsshour").val();
     var jssminutes = $("#jssminutes").val();
     var jssquess = $("#jssquess").val();
+    var juniortrmms = $("#juniortrmms").val();
     var jssedit = $("#jssedit").val();
     //validate form
     var a = document.forms["uploadjss"]["jsssubject"].value;
 
     if (a == null || a == "") {
-		$(toastr.error("Please create a subject"));
-		return false;
-	  } else {
-  
-		  if(jsshour == 0 && jssminutes == 0) {
-  
-			  $(toastr.error("Please specify a valid test time"));
-			  return false;
-		  } else {
-  
-		  if(jssedit == "") {
-			  $(toastr.error("Instruction field cannot be empty"));
-			  return false;
-		  }
-		  }
-	  }
-	  //end of form validation
+      $(toastr.error("Please create a subject"));
+      return false;
+    } else {
+      if (jsshour == 0 && jssminutes == 0) {
+        $(toastr.error("Please specify a valid test time"));
+        return false;
+      } else {
+        if (jssedit == "") {
+          $(toastr.error("Instruction field cannot be empty"));
+          return false;
+        }
+      }
+    }
+    //end of form validation
 
     $.ajax({
       type: "post",
@@ -107,6 +104,7 @@ $(document).ready(function () {
         jssminutes: jssminutes,
         jssquess: jssquess,
         jssedit: jssedit,
+        juniortrmms: juniortrmms,
       },
       success: function (data) {
         $(toastr.error(data)).html(data);
@@ -117,6 +115,7 @@ $(document).ready(function () {
   //sssnext from Modal
   $("#seniornext").click(function () {
     var seniorclass = $("#seniorclass").val();
+    var seniortrmms = $("#seniortrmms").val();
     var seniorsubject = $("#seniorsubject").val();
     var sshour = $("#sshour").val();
     var ssminutes = $("#ssminutes").val();
@@ -127,23 +126,20 @@ $(document).ready(function () {
     var a = document.forms["uploadsenior"]["seniorsubject"].value;
 
     if (a == null || a == "") {
-		$(toastr.error("Please create a subject"));
-		return false;
-	  } else {
-  
-		  if(sshour == 0 && ssminutes == 0) {
-  
-			  $(toastr.error("Please specify a valid test time"));
-			  return false;
-		  } else {
-  
-		  if(ssedit == "") {
-			  $(toastr.error("Instruction field cannot be empty"));
-			  return false;
-		  }
-		  }
-	  }
-	  //end of form validation
+      $(toastr.error("Please create a subject"));
+      return false;
+    } else {
+      if (sshour == 0 && ssminutes == 0) {
+        $(toastr.error("Please specify a valid test time"));
+        return false;
+      } else {
+        if (ssedit == "") {
+          $(toastr.error("Instruction field cannot be empty"));
+          return false;
+        }
+      }
+    }
+    //end of form validation
 
     $.ajax({
       type: "post",
@@ -155,6 +151,7 @@ $(document).ready(function () {
         ssminutes: ssminutes,
         ssquess: ssquess,
         ssedit: ssedit,
+        seniortrmms: seniortrmms,
       },
       success: function (data) {
         $(toastr.error(data)).html(data);
@@ -173,23 +170,20 @@ $(document).ready(function () {
     var a = document.forms["uploadonline"]["onlinesubject"].value;
 
     if (a == null || a == "") {
-		$(toastr.error("Please create a subject"));
-		return false;
-	  } else {
-  
-		  if(othour == 0 && otminutes == 0) {
-  
-			  $(toastr.error("Please specify a valid test time"));
-			  return false;
-		  } else {
-  
-		  if(otedit == "") {
-			  $(toastr.error("Instruction field cannot be empty"));
-			  return false;
-		  }
-		  }
-	  }
-	  //end of form validation
+      $(toastr.error("Please create a subject"));
+      return false;
+    } else {
+      if (othour == 0 && otminutes == 0) {
+        $(toastr.error("Please specify a valid test time"));
+        return false;
+      } else {
+        if (otedit == "") {
+          $(toastr.error("Instruction field cannot be empty"));
+          return false;
+        }
+      }
+    }
+    //end of form validation
 
     $.ajax({
       type: "post",
@@ -206,6 +200,7 @@ $(document).ready(function () {
       },
     });
   });
+
 
   //Validate UploadQuestions
   $("#Questionaire").click(function () {

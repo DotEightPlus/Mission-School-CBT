@@ -38,33 +38,33 @@ function display_message() {
 
 function validation_errors($error_message) {
 
-$error_message = <<<DELIMITER
+	$error_message = <<<DELIMITER
 
-<div class="alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
-    <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-		<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-									</button>
-                 <p><strong>$error_message </strong></p>
-                            </div>
-DELIMITER;
+	<div class="alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
+		<button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
+			<span class="icon-sc-cl" aria-hidden="true">&times;</span>
+										</button>
+					<p><strong>$error_message </strong></p>
+								</div>
+	DELIMITER;
 
-   return $error_message;     
+	return $error_message;     
 
 }
 
 
 function validator($error_message) {
 
-$error_message = <<<DELIMITER
-<div style="background: rgba(234, 114, 140, 0.9); color: white;" class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
-    <button type="button" style="color: white;" class="col-md-12 close sucess-op" data-dismiss="modal" aria-label="Close">
-		<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-									</button>
-                 <p style="color: white;"><strong>$error_message </strong></p>
-                            </div>
-DELIMITER;
+	$error_message = <<<DELIMITER
+	<div style="background: rgba(234, 114, 140, 0.9); color: white;" class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
+		<button type="button" style="color: white;" class="col-md-12 close sucess-op" data-dismiss="modal" aria-label="Close">
+			<span class="icon-sc-cl" aria-hidden="true">&times;</span>
+										</button>
+					<p style="color: white;"><strong>$error_message </strong></p>
+								</div>
+	DELIMITER;
 
-   return $error_message;     
+	return $error_message;     
 
 }
 
@@ -183,7 +183,7 @@ if(row_count($result) == 1) {
 //process category
 $errors = [];
 
-if(isset($_POST['catclass']) && isset($_POST['subject']) && isset($_POST['hour']) && isset($_POST['minutes']) && isset($_POST['quess']) && isset($_POST['instruct'])) {
+if(isset($_POST['catclass']) && isset($_POST['subject']) && isset($_POST['hour']) && isset($_POST['minutes']) && isset($_POST['quess']) && isset($_POST['instruct']) && isset($_POST['sbstrmms'])) {
 
 	//set and clean variables
 	$class 		=	clean($_POST['catclass']);
@@ -192,7 +192,8 @@ if(isset($_POST['catclass']) && isset($_POST['subject']) && isset($_POST['hour']
 	$minutes 	=   $_POST['minutes'];
 	$quess      = 	$_POST['quess'];
 	$instruct   =   $_POST['instruct'];
-	$conc 	 = 	strtolower($class."_".$subject);
+	$sbstrmms	= 	$_POST['sbstrmms'];
+	$conc 	 = 	strtolower($class."_".$subject."_".$sbstrmms);
 
 
 	//check if table exit
@@ -232,27 +233,27 @@ if(isset($_POST['catclass']) && isset($_POST['subject']) && isset($_POST['hour']
 
 function create_table($class, $subject, $conc, $hour, $minutes, $quess, $instruct) {
 
-// sql to create table
-$sql = "CREATE TABLE `".$conc."`
-(
-id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-sn text(255),
-question text(255),
-oa text(255),
-ob text(255),
-oc text(255),
-od text(255),
-correct text(255)
-)";
-$result = query($sql);
-confirm($result);
+	// sql to create table
+	$sql = "CREATE TABLE `".$conc."`
+	(
+	id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	sn text(255),
+	question text(255),
+	oa text(255),
+	ob text(255),
+	oc text(255),
+	od text(255),
+	correct text(255)
+	)";
+	$result = query($sql);
+	confirm($result);
 
-//time allowed
+	//time allowed
 
-$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
-$sqll.= " VALUES('$conc', '$hour', '$minutes', '$quess', '$instruct')";
-$resullt = query($sqll);	
-confirm($resullt);
+	$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
+	$sqll.= " VALUES('$conc', '$hour', '$minutes', '$quess', '$instruct')";
+	$resullt = query($sqll);	
+	confirm($resullt);
 
 }
  //end of function 
@@ -265,7 +266,7 @@ confirm($resullt);
 //jssprocess category
 $errors = [];
 
-if(isset($_POST['jssclass']) && isset($_POST['jsssubject']) && isset($_POST['jsshour']) && isset($_POST['jssminutes']) && isset($_POST['jssquess']) && isset($_POST['jssedit'])) {
+if(isset($_POST['jssclass']) && isset($_POST['jsssubject']) && isset($_POST['jsshour']) && isset($_POST['jssminutes']) && isset($_POST['jssquess']) && isset($_POST['jssedit']) && isset($_POST['juniortrmms'])) {
 
 	//set and clean variables
 	$class 		=	clean($_POST['jssclass']);
@@ -274,7 +275,8 @@ if(isset($_POST['jssclass']) && isset($_POST['jsssubject']) && isset($_POST['jss
 	$jssminutes = 	$_POST['jssminutes'];
 	$jssquess   =   $_POST['jssquess'];
 	$jssedit   =   $_POST['jssedit'];
-	$conc 		 = 	strtolower($class."_".$subject);
+	$jsstrmms  = $_POST['juniortrmms'];
+	$conc 		 = 	strtolower($class."_".$subject."_".$jsstrmms);
 
 
 	//check if table exit
@@ -314,27 +316,27 @@ if(isset($_POST['jssclass']) && isset($_POST['jsssubject']) && isset($_POST['jss
 
 function create_tablejss($class, $subject, $conc, $jsshour, $jssminutes, $jssquess, $jssedit) {
 
-// sql to create table
-$sql = "CREATE TABLE `".$conc."`
-(
-id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-sn text(255),
-question text(255),
-oa text(255),
-ob text(255),
-oc text(255),
-od text(255),
-correct text(255)
-)";
-$result = query($sql);
-confirm($result);
+	// sql to create table
+	$sql = "CREATE TABLE `".$conc."`
+	(
+	id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	sn text(255),
+	question text(255),
+	oa text(255),
+	ob text(255),
+	oc text(255),
+	od text(255),
+	correct text(255)
+	)";
+	$result = query($sql);
+	confirm($result);
 
-//time allowed
+	//time allowed
 
-$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
-$sqll.= " VALUES('$conc', '$jsshour', '$jssminutes', '$jssquess', '$jssedit')";
-$resullt = query($sqll);
-confirm($resullt);
+	$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
+	$sqll.= " VALUES('$conc', '$jsshour', '$jssminutes', '$jssquess', '$jssedit')";
+	$resullt = query($sqll);
+	confirm($resullt);
 
 }
  //end of function 
@@ -349,7 +351,7 @@ confirm($resullt);
 //seniorprocess category
 $errors = [];
 
-if(isset($_POST['seniorclass']) && isset($_POST['seniorsubject']) && isset($_POST['sshour']) && isset($_POST['ssminutes']) && isset($_POST['ssquess']) && isset($_POST['ssedit'])) {
+if(isset($_POST['seniorclass']) && isset($_POST['seniorsubject']) && isset($_POST['sshour']) && isset($_POST['ssminutes']) && isset($_POST['ssquess']) && isset($_POST['ssedit']) && isset($_POST['seniortrmms'])) {
 
 	//set and clean variables
 	$class 		=	clean($_POST['seniorclass']);
@@ -357,8 +359,9 @@ if(isset($_POST['seniorclass']) && isset($_POST['seniorsubject']) && isset($_POS
 	$sshour		= 	$_POST['sshour'];
 	$ssminutes	= 	$_POST['ssminutes'];
 	$ssquess    = 	$_POST['ssquess'];
-	$ssedit    = 	$_POST['ssedit'];
-	$conc 	 = 	strtolower($class."_".$subject);
+	$ssedit     = 	$_POST['ssedit'];
+	$sstrmms 	= 	$_POST['seniortrmms'];
+	$conc 	 = 	strtolower($class."_".$subject."_".$sstrmms);
 
 
 	//check if table exit
