@@ -38,33 +38,33 @@ function display_message() {
 
 function validation_errors($error_message) {
 
-$error_message = <<<DELIMITER
+	$error_message = <<<DELIMITER
 
-<div class="alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
-    <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-		<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-									</button>
-                 <p><strong>$error_message </strong></p>
-                            </div>
-DELIMITER;
+	<div class="alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
+		<button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
+			<span class="icon-sc-cl" aria-hidden="true">&times;</span>
+										</button>
+					<p><strong>$error_message </strong></p>
+								</div>
+	DELIMITER;
 
-   return $error_message;     
+	return $error_message;     
 
 }
 
 
 function validator($error_message) {
 
-$error_message = <<<DELIMITER
-<div style="background: rgba(234, 114, 140, 0.9); color: white;" class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
-    <button type="button" style="color: white;" class="col-md-12 close sucess-op" data-dismiss="modal" aria-label="Close">
-		<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-									</button>
-                 <p style="color: white;"><strong>$error_message </strong></p>
-                            </div>
-DELIMITER;
+	$error_message = <<<DELIMITER
+	<div style="background: rgba(234, 114, 140, 0.9); color: white;" class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
+		<button type="button" style="color: white;" class="col-md-12 close sucess-op" data-dismiss="modal" aria-label="Close">
+			<span class="icon-sc-cl" aria-hidden="true">&times;</span>
+										</button>
+					<p style="color: white;"><strong>$error_message </strong></p>
+								</div>
+	DELIMITER;
 
-   return $error_message;     
+	return $error_message;     
 
 }
 
@@ -183,7 +183,7 @@ if(row_count($result) == 1) {
 //process category
 $errors = [];
 
-if(isset($_POST['catclass']) && isset($_POST['subject']) && isset($_POST['hour']) && isset($_POST['minutes']) && isset($_POST['quess']) && isset($_POST['instruct'])) {
+if(isset($_POST['catclass']) && isset($_POST['subject']) && isset($_POST['hour']) && isset($_POST['minutes']) && isset($_POST['quess']) && isset($_POST['instruct']) && isset($_POST['sbstrmms'])) {
 
 	//set and clean variables
 	$class 		=	clean($_POST['catclass']);
@@ -192,7 +192,8 @@ if(isset($_POST['catclass']) && isset($_POST['subject']) && isset($_POST['hour']
 	$minutes 	=   $_POST['minutes'];
 	$quess      = 	$_POST['quess'];
 	$instruct   =   $_POST['instruct'];
-	$conc 	 = 	strtolower($class."_".$subject);
+	$sbstrmms	= 	$_POST['sbstrmms'];
+	$conc 	 = 	strtolower($class."_".$subject."_".$sbstrmms);
 
 
 	//check if table exit
@@ -232,27 +233,27 @@ if(isset($_POST['catclass']) && isset($_POST['subject']) && isset($_POST['hour']
 
 function create_table($class, $subject, $conc, $hour, $minutes, $quess, $instruct) {
 
-// sql to create table
-$sql = "CREATE TABLE `".$conc."`
-(
-id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-sn text(255),
-question text(255),
-oa text(255),
-ob text(255),
-oc text(255),
-od text(255),
-correct text(255)
-)";
-$result = query($sql);
-confirm($result);
+	// sql to create table
+	$sql = "CREATE TABLE `".$conc."`
+	(
+	id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	sn text(255),
+	question text(255),
+	oa text(255),
+	ob text(255),
+	oc text(255),
+	od text(255),
+	correct text(255)
+	)";
+	$result = query($sql);
+	confirm($result);
 
-//time allowed
+	//time allowed
 
-$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
-$sqll.= " VALUES('$conc', '$hour', '$minutes', '$quess', '$instruct')";
-$resullt = query($sqll);	
-confirm($resullt);
+	$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
+	$sqll.= " VALUES('$conc', '$hour', '$minutes', '$quess', '$instruct')";
+	$resullt = query($sqll);	
+	confirm($resullt);
 
 }
  //end of function 
@@ -265,7 +266,7 @@ confirm($resullt);
 //jssprocess category
 $errors = [];
 
-if(isset($_POST['jssclass']) && isset($_POST['jsssubject']) && isset($_POST['jsshour']) && isset($_POST['jssminutes']) && isset($_POST['jssquess']) && isset($_POST['jssedit'])) {
+if(isset($_POST['jssclass']) && isset($_POST['jsssubject']) && isset($_POST['jsshour']) && isset($_POST['jssminutes']) && isset($_POST['jssquess']) && isset($_POST['jssedit']) && isset($_POST['juniortrmms'])) {
 
 	//set and clean variables
 	$class 		=	clean($_POST['jssclass']);
@@ -274,7 +275,8 @@ if(isset($_POST['jssclass']) && isset($_POST['jsssubject']) && isset($_POST['jss
 	$jssminutes = 	$_POST['jssminutes'];
 	$jssquess   =   $_POST['jssquess'];
 	$jssedit   =   $_POST['jssedit'];
-	$conc 		 = 	strtolower($class."_".$subject);
+	$jsstrmms  = $_POST['juniortrmms'];
+	$conc 		 = 	strtolower($class."_".$subject."_".$jsstrmms);
 
 
 	//check if table exit
@@ -314,27 +316,27 @@ if(isset($_POST['jssclass']) && isset($_POST['jsssubject']) && isset($_POST['jss
 
 function create_tablejss($class, $subject, $conc, $jsshour, $jssminutes, $jssquess, $jssedit) {
 
-// sql to create table
-$sql = "CREATE TABLE `".$conc."`
-(
-id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-sn text(255),
-question text(255),
-oa text(255),
-ob text(255),
-oc text(255),
-od text(255),
-correct text(255)
-)";
-$result = query($sql);
-confirm($result);
+	// sql to create table
+	$sql = "CREATE TABLE `".$conc."`
+	(
+	id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	sn text(255),
+	question text(255),
+	oa text(255),
+	ob text(255),
+	oc text(255),
+	od text(255),
+	correct text(255)
+	)";
+	$result = query($sql);
+	confirm($result);
 
-//time allowed
+	//time allowed
 
-$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
-$sqll.= " VALUES('$conc', '$jsshour', '$jssminutes', '$jssquess', '$jssedit')";
-$resullt = query($sqll);
-confirm($resullt);
+	$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
+	$sqll.= " VALUES('$conc', '$jsshour', '$jssminutes', '$jssquess', '$jssedit')";
+	$resullt = query($sqll);
+	confirm($resullt);
 
 }
  //end of function 
@@ -349,7 +351,7 @@ confirm($resullt);
 //seniorprocess category
 $errors = [];
 
-if(isset($_POST['seniorclass']) && isset($_POST['seniorsubject']) && isset($_POST['sshour']) && isset($_POST['ssminutes']) && isset($_POST['ssquess']) && isset($_POST['ssedit'])) {
+if(isset($_POST['seniorclass']) && isset($_POST['seniorsubject']) && isset($_POST['sshour']) && isset($_POST['ssminutes']) && isset($_POST['ssquess']) && isset($_POST['ssedit']) && isset($_POST['seniortrmms'])) {
 
 	//set and clean variables
 	$class 		=	clean($_POST['seniorclass']);
@@ -357,8 +359,9 @@ if(isset($_POST['seniorclass']) && isset($_POST['seniorsubject']) && isset($_POS
 	$sshour		= 	$_POST['sshour'];
 	$ssminutes	= 	$_POST['ssminutes'];
 	$ssquess    = 	$_POST['ssquess'];
-	$ssedit    = 	$_POST['ssedit'];
-	$conc 	 = 	strtolower($class."_".$subject);
+	$ssedit     = 	$_POST['ssedit'];
+	$sstrmms 	= 	$_POST['seniortrmms'];
+	$conc 	 = 	strtolower($class."_".$subject."_".$sstrmms);
 
 
 	//check if table exit
@@ -398,27 +401,27 @@ if(isset($_POST['seniorclass']) && isset($_POST['seniorsubject']) && isset($_POS
 
 function create_tablesss($class, $subject, $conc, $sshour, $ssminutes, $ssquess, $ssedit) {
 
-// sql to create table
-$sql = "CREATE TABLE `".$conc."`
-(
-id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-sn text(255),
-question text(255),
-oa text(255),
-ob text(255),
-oc text(255),
-od text(255),
-correct text(255)
-)";
-$result = query($sql);
-confirm($result);
+	// sql to create table
+	$sql = "CREATE TABLE `".$conc."`
+	(
+	id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	sn text(255),
+	question text(255),
+	oa text(255),
+	ob text(255),
+	oc text(255),
+	od text(255),
+	correct text(255)
+	)";
+	$result = query($sql);
+	confirm($result);
 
-//time allowed
+	//time allowed
 
-$sqll = "INSERT INTO timer(`subject`, `hour` , `min`, `attempt`, `instruct`)";
-$sqll.= " VALUES('$conc', '$sshour' , '$ssminutes', '$ssquess', '$ssedit')";
-$resullt = query($sqll);
-confirm($resullt);
+	$sqll = "INSERT INTO timer(`subject`, `hour` , `min`, `attempt`, `instruct`)";
+	$sqll.= " VALUES('$conc', '$sshour' , '$ssminutes', '$ssquess', '$ssedit')";
+	$resullt = query($sqll);
+	confirm($resullt);
 
 }
  //end of function 
@@ -479,27 +482,27 @@ if(isset($_POST['onlinesubject']) && isset($_POST['othour']) && isset($_POST['ot
 
 function create_tableOnline($conc, $othour, $otminutes, $otquess, $otedit) {
 
-// sql to create table
-$sql = "CREATE TABLE `".$conc."`
-(
-id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-sn text(255),
-question text(255),
-oa text(255),
-ob text(255),
-oc text(255),
-od text(255),
-correct text(255)
-)";
-$result = query($sql);
-confirm($result);
+	// sql to create table
+	$sql = "CREATE TABLE `".$conc."`
+	(
+	id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	sn text(255),
+	question text(255),
+	oa text(255),
+	ob text(255),
+	oc text(255),
+	od text(255),
+	correct text(255)
+	)";
+	$result = query($sql);
+	confirm($result);
 
-//time allowed
+	//time allowed
 
-$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
-$sqll.= " VALUES('$conc', '$othour', '$otminutes', '$otquess', '$otedit')";
-$resullt = query($sqll);
-confirm($resullt);
+	$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
+	$sqll.= " VALUES('$conc', '$othour', '$otminutes', '$otquess', '$otedit')";
+	$resullt = query($sqll);
+	confirm($resullt);
 
 }
  //end of function 
@@ -514,46 +517,46 @@ $errors = [];
 
 if(isset($_POST['sn']) && isset($_POST['ques']) && isset($_POST['oa']) && isset($_POST['ob']) && isset($_POST['oc']) && isset($_POST['od']) && isset($_POST['option']) && isset($_POST['subj'])) {
 
-	//assign variables
+		//assign variables
 
-	$sn 		= $_POST['sn'];
-	$ques 		= $_POST['ques'];
-	$oa 		= $_POST['oa'];
-	$ob 		= $_POST['ob'];
-	$oc 		= $_POST['oc'];
-	$od 		= $_POST['od'];
-	$cor 		= $_POST['option'];
-	$subj 		= $_POST['subj'];
+		$sn 		= $_POST['sn'];
+		$ques 		= $_POST['ques'];
+		$oa 		= $_POST['oa'];
+		$ob 		= $_POST['ob'];
+		$oc 		= $_POST['oc'];
+		$od 		= $_POST['od'];
+		$cor 		= $_POST['option'];
+		$subj 		= $_POST['subj'];
 
-//check if question serial number exist
+	//check if question serial number exist
 
-	if(sn_exist($sn, $subj)) {
+		if(sn_exist($sn, $subj)) {
 
-			echo "That serial number already exits!";
-		}  else {
-
-
-	if(!empty($errors)) {
-
-				foreach ($errors as $error) {
-			
-	                echo validation_errors($error); 
-
-				}
-
+				echo "That serial number already exits!";
 			}  else {
 
-				if(upload_questionaire($sn, $ques, $oa, $ob, $oc, $od, $cor, $subj)) {
 
-					echo "<script>$(toastr.error('Server Error'));</script>";												
+		if(!empty($errors)) {
 
-				} else {
-					echo "Loading... Please wait";
-					echo '<script>window.location.href ="./questions?id='.$subj.'&quest='.$subj.'"</script>';												
-				 
-				}
-			} 
-		}
+					foreach ($errors as $error) {
+				
+						echo validation_errors($error); 
+
+					}
+
+				}  else {
+
+					if(upload_questionaire($sn, $ques, $oa, $ob, $oc, $od, $cor, $subj)) {
+
+						echo "<script>$(toastr.error('Server Error'));</script>";												
+
+					} else {
+						echo "Loading... Please wait";
+						echo '<script>window.location.href ="./questions?id='.$subj.'&quest='.$subj.'"</script>';												
+					
+					}
+				} 
+			}
 
 }
 
@@ -562,10 +565,10 @@ if(isset($_POST['sn']) && isset($_POST['ques']) && isset($_POST['oa']) && isset(
 function upload_questionaire($sn, $ques, $oa, $ob, $oc, $od, $cor, $subj) {
 
 
-$sql = "INSERT INTO `".$subj."`(`sn`, `question`, `oa`, `ob`, `oc`, `od`, `correct`)";
-$sql.= " VALUES('$sn', '$ques', '$oa', '$ob', '$oc', '$od', '$cor')";
-$result = query($sql);
-confirm($result);
+	$sql = "INSERT INTO `".$subj."`(`sn`, `question`, `oa`, `ob`, `oc`, `od`, `correct`)";
+	$sql.= " VALUES('$sn', '$ques', '$oa', '$ob', '$oc', '$od', '$cor')";
+	$result = query($sql);
+	confirm($result);
 
 }
 
@@ -578,36 +581,36 @@ $errors = [];
 
 if(isset($_POST['delsn']) && isset($_POST['val'])) {
 
-	//variables
-	$dels 		= 	 clean($_POST['delsn']);
-	$val 		= 	 clean($_POST['val']);
+		//variables
+		$dels 		= 	 clean($_POST['delsn']);
+		$val 		= 	 clean($_POST['val']);
 
-if(sn_dexist($dels, $val)) {
+	if(sn_dexist($dels, $val)) {
 
-			echo "That serial number does not exits!";
+				echo "That serial number does not exits!";
+			}  else {
+		
+	if(!empty($errors)) {
+
+			foreach ($errors as $error) {
+		
+				echo validation_errors($error); 
+
+			}
+
 		}  else {
-	
-if(!empty($errors)) {
 
-		foreach ($errors as $error) {
-	
-            echo validation_errors($error); 
+			if(delete_question($dels, $val)) {
 
-		}
+				echo "<script>$(toastr.error('Server Error'));</script>";												
 
-	}  else {
-
-		if(delete_question($dels, $val)) {
-
-			echo "<script>$(toastr.error('Server Error'));</script>";												
-
-		} else {
-			echo "Loading... Please wait";
-			echo '<script>window.location.href ="./questions?id='.$val.'&del='.$dels.'"</script>';												
-		 
-		}
-	} 
-}
+			} else {
+				echo "Loading... Please wait";
+				echo '<script>window.location.href ="./questions?id='.$val.'&del='.$dels.'"</script>';												
+			
+			}
+		} 
+	}
 }
 
 //delete function
@@ -827,7 +830,10 @@ echo '<script>window.location.href ="./access?id='.$nww.'"</script>';
 }
 
 
-if(isset($_POST['idc']) && isset($_POST['hourc']) && isset($_POST['minutesc']) && isset($_POST['quessc']) && isset($_POST['editc'])) {
+
+//update time record and subject termly record
+
+if(isset($_POST['idc']) && isset($_POST['hourc']) && isset($_POST['minutesc']) && isset($_POST['quessc']) && isset($_POST['editc']) && isset($_POST['eddsbj']) && isset($_POST['eddtms'])) {
 
 	//set and clean variables
 	$id			=	$_POST['idc'];
@@ -835,10 +841,13 @@ if(isset($_POST['idc']) && isset($_POST['hourc']) && isset($_POST['minutesc']) &
 	$minutes	=   $_POST['minutesc'];
 	$quessc     =   $_POST['quessc'];
 	$editc 		=	$_POST['editc'];
+	$eddtms		= 	$_POST['eddtms'];
+	$eddsbj		= 	$_POST['eddsbj'];
 
+	$conc 		= strtolower($eddsbj."_".$eddtms);
 
 	
-	$sql = "UPDATE `timer` SET `hour` = '$hour', `min` = '$minutes', `attempt` = '$quessc', `instruct` = '$editc' WHERE `subject` = '$id'";
+	$sql = "UPDATE `timer` SET `subject` = '$conc', `hour` = '$hour', `min` = '$minutes', `attempt` = '$quessc', `instruct` = '$editc' WHERE `subject` = '$id'";
 	$result = query($sql);
 	echo "Loading... Please wait";
 	echo '<script>window.location.href ="./questions?id='.$id.'"</script>';

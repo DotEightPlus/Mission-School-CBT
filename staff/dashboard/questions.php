@@ -159,6 +159,8 @@ $data = $_GET['id'];
                                 style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
                                 required></textarea>
                         </div>
+
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -327,6 +329,19 @@ $data = $_GET['id'];
             <div class="modal-body">
                 <div class="card-body">
                     <div class="row">
+                    <div class="form-group col-12">
+                            <label for="exampleInputPassword1">Edit subject .:</label>
+                            <input type="text" value="<?php echo $_GET['id'] ?>"
+                                id="eddsbj" name="onlinesubject" class="form-control" required>
+                        </div>
+                    <div class="form-group col-12">
+                            <label for="exampleInputPassword1">Edit Term .:</label>
+                            <select id="eddtms" class="form-control">
+                                <option id="eddtms">1st Term</option>
+                                <option id="eddtms">2nd Term</option>
+                                <option id="eddtms">3rd Term</option>
+                            </select>
+                        </div>
                         <div class="form-group col-md-4">
                             <label for="exampleInputPassword1">Prev. Hour(s) Allowed</label>
                             <input type="number" placeholder="" value="<?php echo $timer ?>" id="hourc"
