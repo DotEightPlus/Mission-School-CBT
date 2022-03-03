@@ -482,27 +482,27 @@ if(isset($_POST['onlinesubject']) && isset($_POST['othour']) && isset($_POST['ot
 
 function create_tableOnline($conc, $othour, $otminutes, $otquess, $otedit) {
 
-// sql to create table
-$sql = "CREATE TABLE `".$conc."`
-(
-id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-sn text(255),
-question text(255),
-oa text(255),
-ob text(255),
-oc text(255),
-od text(255),
-correct text(255)
-)";
-$result = query($sql);
-confirm($result);
+	// sql to create table
+	$sql = "CREATE TABLE `".$conc."`
+	(
+	id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	sn text(255),
+	question text(255),
+	oa text(255),
+	ob text(255),
+	oc text(255),
+	od text(255),
+	correct text(255)
+	)";
+	$result = query($sql);
+	confirm($result);
 
-//time allowed
+	//time allowed
 
-$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
-$sqll.= " VALUES('$conc', '$othour', '$otminutes', '$otquess', '$otedit')";
-$resullt = query($sqll);
-confirm($resullt);
+	$sqll = "INSERT INTO timer(`subject`, `hour`, `min`, `attempt`, `instruct`)";
+	$sqll.= " VALUES('$conc', '$othour', '$otminutes', '$otquess', '$otedit')";
+	$resullt = query($sqll);
+	confirm($resullt);
 
 }
  //end of function 
@@ -517,46 +517,46 @@ $errors = [];
 
 if(isset($_POST['sn']) && isset($_POST['ques']) && isset($_POST['oa']) && isset($_POST['ob']) && isset($_POST['oc']) && isset($_POST['od']) && isset($_POST['option']) && isset($_POST['subj'])) {
 
-	//assign variables
+		//assign variables
 
-	$sn 		= $_POST['sn'];
-	$ques 		= $_POST['ques'];
-	$oa 		= $_POST['oa'];
-	$ob 		= $_POST['ob'];
-	$oc 		= $_POST['oc'];
-	$od 		= $_POST['od'];
-	$cor 		= $_POST['option'];
-	$subj 		= $_POST['subj'];
+		$sn 		= $_POST['sn'];
+		$ques 		= $_POST['ques'];
+		$oa 		= $_POST['oa'];
+		$ob 		= $_POST['ob'];
+		$oc 		= $_POST['oc'];
+		$od 		= $_POST['od'];
+		$cor 		= $_POST['option'];
+		$subj 		= $_POST['subj'];
 
-//check if question serial number exist
+	//check if question serial number exist
 
-	if(sn_exist($sn, $subj)) {
+		if(sn_exist($sn, $subj)) {
 
-			echo "That serial number already exits!";
-		}  else {
-
-
-	if(!empty($errors)) {
-
-				foreach ($errors as $error) {
-			
-	                echo validation_errors($error); 
-
-				}
-
+				echo "That serial number already exits!";
 			}  else {
 
-				if(upload_questionaire($sn, $ques, $oa, $ob, $oc, $od, $cor, $subj)) {
 
-					echo "<script>$(toastr.error('Server Error'));</script>";												
+		if(!empty($errors)) {
 
-				} else {
-					echo "Loading... Please wait";
-					echo '<script>window.location.href ="./questions?id='.$subj.'&quest='.$subj.'"</script>';												
-				 
-				}
-			} 
-		}
+					foreach ($errors as $error) {
+				
+						echo validation_errors($error); 
+
+					}
+
+				}  else {
+
+					if(upload_questionaire($sn, $ques, $oa, $ob, $oc, $od, $cor, $subj)) {
+
+						echo "<script>$(toastr.error('Server Error'));</script>";												
+
+					} else {
+						echo "Loading... Please wait";
+						echo '<script>window.location.href ="./questions?id='.$subj.'&quest='.$subj.'"</script>';												
+					
+					}
+				} 
+			}
 
 }
 
@@ -565,10 +565,10 @@ if(isset($_POST['sn']) && isset($_POST['ques']) && isset($_POST['oa']) && isset(
 function upload_questionaire($sn, $ques, $oa, $ob, $oc, $od, $cor, $subj) {
 
 
-$sql = "INSERT INTO `".$subj."`(`sn`, `question`, `oa`, `ob`, `oc`, `od`, `correct`)";
-$sql.= " VALUES('$sn', '$ques', '$oa', '$ob', '$oc', '$od', '$cor')";
-$result = query($sql);
-confirm($result);
+	$sql = "INSERT INTO `".$subj."`(`sn`, `question`, `oa`, `ob`, `oc`, `od`, `correct`)";
+	$sql.= " VALUES('$sn', '$ques', '$oa', '$ob', '$oc', '$od', '$cor')";
+	$result = query($sql);
+	confirm($result);
 
 }
 
@@ -581,36 +581,36 @@ $errors = [];
 
 if(isset($_POST['delsn']) && isset($_POST['val'])) {
 
-	//variables
-	$dels 		= 	 clean($_POST['delsn']);
-	$val 		= 	 clean($_POST['val']);
+		//variables
+		$dels 		= 	 clean($_POST['delsn']);
+		$val 		= 	 clean($_POST['val']);
 
-if(sn_dexist($dels, $val)) {
+	if(sn_dexist($dels, $val)) {
 
-			echo "That serial number does not exits!";
+				echo "That serial number does not exits!";
+			}  else {
+		
+	if(!empty($errors)) {
+
+			foreach ($errors as $error) {
+		
+				echo validation_errors($error); 
+
+			}
+
 		}  else {
-	
-if(!empty($errors)) {
 
-		foreach ($errors as $error) {
-	
-            echo validation_errors($error); 
+			if(delete_question($dels, $val)) {
 
-		}
+				echo "<script>$(toastr.error('Server Error'));</script>";												
 
-	}  else {
-
-		if(delete_question($dels, $val)) {
-
-			echo "<script>$(toastr.error('Server Error'));</script>";												
-
-		} else {
-			echo "Loading... Please wait";
-			echo '<script>window.location.href ="./questions?id='.$val.'&del='.$dels.'"</script>';												
-		 
-		}
-	} 
-}
+			} else {
+				echo "Loading... Please wait";
+				echo '<script>window.location.href ="./questions?id='.$val.'&del='.$dels.'"</script>';												
+			
+			}
+		} 
+	}
 }
 
 //delete function
